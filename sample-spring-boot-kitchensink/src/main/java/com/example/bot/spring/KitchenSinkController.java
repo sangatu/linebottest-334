@@ -384,7 +384,7 @@ public class KitchenSinkController {
              */
 
             //お悩み2段目
-            case "お悩み2段目":{
+            case "お悩み別2段目":{
               	 String imageUrl = createUri("/static/buttons/1040.jpg");
                    ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
                            Arrays.asList(
