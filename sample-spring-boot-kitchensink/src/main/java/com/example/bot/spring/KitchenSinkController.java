@@ -24,6 +24,9 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
+//add import begin
+import java.util.Calendar;
+//add import end
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
@@ -263,6 +266,182 @@ public class KitchenSinkController {
                 }
                 break;
             }
+            /***
+             * 商品情報をカテゴリ別か、悩み別か選択するボタン表示
+             * add 2017.10.16 taku.shimomura begin
+             */
+            case "商品情報":{
+                String imageUrl = createUri("/static/buttons/1040.jpg");
+                ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
+                        imageUrl,
+                        "商品情報選択",
+                        "どの条件で探しますか？",
+                        Arrays.asList(
+                                new PostbackAction("カテゴリ別",
+                                                   "カテゴリ別"),
+                                new MessageAction("お悩み別",
+                                                  "お悩み別")
+                        ));
+                TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
+                this.reply(replyToken, templateMessage);
+                break;
+            }
+            /***
+             * add 2017.10.16 taku.shimomura end
+             */
+
+            /***
+             * カテゴリをイメージカルーセルで表示
+             * add 2017.10.17 shimomurataku begin
+             */
+            case "カテゴリ別":{
+            	 String imageUrl = createUri("/static/buttons/1040.jpg");
+                 ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
+                         Arrays.asList(
+                                 new ImageCarouselColumn(imageUrl,
+                                         new URIAction("クリーム",
+                                                 "https://line.me")
+                                 ),
+                                 new ImageCarouselColumn(imageUrl,
+                                         new URIAction("美容液",
+                                                 "https://line.me")
+                                 ),
+                                 new ImageCarouselColumn(imageUrl,
+                                         new URIAction("ボディケア・洗顔",
+                                                 "https://line.me")
+                                 ),
+                                 new ImageCarouselColumn(imageUrl,
+                                         new URIAction("メイクアップ",
+                                                 "https://line.me")
+                                 ),
+                                 new ImageCarouselColumn(imageUrl,
+                                         new URIAction("ローション",
+                                                 "https://line.me")
+                                 ),
+                                 new ImageCarouselColumn(imageUrl,
+                                         new URIAction("ヘアケア",
+                                                 "https://line.me")
+                                 ),
+                                 new ImageCarouselColumn(imageUrl,
+                                         new URIAction("健康食品",
+                                                 "https://line.me")
+                                 )
+                         ));
+                 TemplateMessage templateMessage = new TemplateMessage("ImageCarousel alt text", imageCarouselTemplate);
+                 this.reply(replyToken, templateMessage);
+                 break;
+            }
+            /***
+             * add 2017.10.17 taku.shimomura end
+             */
+
+            /***
+             * 悩みをイメージカルーセル表示
+             * add 2017.10.17 taku.shimomura begin
+             */
+            case "お悩み別":{
+           	 String imageUrl = createUri("/static/buttons/1040.jpg");
+                ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
+                        Arrays.asList(
+                                new ImageCarouselColumn(imageUrl,
+                                        new URIAction("ニキビ",
+                                                "https://line.me")
+                                ),
+                                new ImageCarouselColumn(imageUrl,
+                                        new URIAction("年齢肌",
+                                                "https://line.me")
+                                ),
+                                new ImageCarouselColumn(imageUrl,
+                                        new URIAction("乾燥肌",
+                                                "https://line.me")
+                                ),
+                                new ImageCarouselColumn(imageUrl,
+                                        new URIAction("ハリがない",
+                                                "https://line.me")
+                                ),
+                                new ImageCarouselColumn(imageUrl,
+                                        new URIAction("脂性肌",
+                                                "https://line.me")
+                                ),
+                                new ImageCarouselColumn(imageUrl,
+                                        new URIAction("毛穴の汚れ",
+                                                "https://line.me")
+                                )
+                        ));
+                TemplateMessage templateMessage = new TemplateMessage("ImageCarousel alt text", imageCarouselTemplate);
+                this.reply(replyToken, templateMessage);
+                break;
+           }
+            /***
+             * add 2017.10.17 taku.shimomura end
+             */
+            /***
+             * ポイント確認
+             * add 2017.10.17 taku.shimomura begin
+             */
+            case "ポイント確認":{
+            	String userId = event.getSource().getUserId();
+                if (userId != null) {
+                    lineMessagingClient
+                            .getProfile(userId)
+                            .whenComplete((profile, throwable) -> {
+                                if (throwable != null) {
+                                    this.replyText(replyToken, throwable.getMessage());
+                                    return;
+                                }
+
+                                this.reply(
+                                        replyToken,
+                                        Arrays.asList(new TextMessage(
+                                                              profile.getDisplayName() + "さんのポイントは53万ポイントです"))
+                                );
+
+                            });
+                } else {
+                    this.replyText(replyToken, "Bot can't use profile API without user ID");
+                }
+            	break;
+            }
+            /***
+             * add 2017.10.17 taku.shimomura end
+             */
+
+            /***
+             * リマインド機能
+             * 訪問する日時を教えてくれる
+             * add 2017.10.17 taku.shimomura begin
+             */
+            case "訪問日時を教えて":{
+            	String userId = event.getSource().getUserId();
+
+                Calendar today = Calendar.getInstance();
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 E曜日");
+
+                if (userId != null) {
+                    lineMessagingClient
+                            .getProfile(userId)
+                            .whenComplete((profile, throwable) -> {
+                                if (throwable != null) {
+                                    this.replyText(replyToken, throwable.getMessage());
+                                    return;
+                                }
+
+                                this.reply(
+                                        replyToken,
+                                        Arrays.asList(new TextMessage(
+                                                              profile.getDisplayName() + "さんのご自宅には"+sdf.format(today.getTime())+"に訪問させていただきます"))
+                                );
+
+                            });
+                } else {
+                    this.replyText(replyToken, "Bot can't use profile API without user ID");
+                }
+            	break;
+            }
+            /***
+             * add 2017.10.17 taku.shimomura end
+             */
             case "bye": {
                 Source source = event.getSource();
                 if (source instanceof GroupSource) {
