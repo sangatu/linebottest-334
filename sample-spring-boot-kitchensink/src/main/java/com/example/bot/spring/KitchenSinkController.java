@@ -278,7 +278,7 @@ public class KitchenSinkController {
                         "商品情報選択",
                         "どの条件で探しますか？",
                         Arrays.asList(
-                                new PostbackAction("カテゴリ別",
+                                new MessageAction("カテゴリ別",
                                                    "カテゴリ別"),
                                 new MessageAction("お悩み別",
                                                   "お悩み別")
@@ -318,11 +318,12 @@ public class KitchenSinkController {
                                  new ImageCarouselColumn(imageUrl,
                                          new URIAction("ローション",
                                                  "https://line.me")
-                                 ),
-                                 new ImageCarouselColumn(imageUrl,
-                                         new URIAction("ヘアケア",
-                                                 "https://line.me")
                                  )
+
+//                                 new ImageCarouselColumn(imageUrl,
+//                                         new URIAction("ヘアケア",
+//                                                 "https://line.me")
+//                                 )
 
 //                                 new ImageCarouselColumn(imageUrl,
 //                                         new URIAction("健康食品",
@@ -418,7 +419,7 @@ public class KitchenSinkController {
 
                 Calendar today = Calendar.getInstance();
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日kk時mm分");
 
                 if (userId != null) {
                     lineMessagingClient
