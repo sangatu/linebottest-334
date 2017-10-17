@@ -322,11 +322,12 @@ public class KitchenSinkController {
                                  new ImageCarouselColumn(imageUrl,
                                          new URIAction("ヘアケア",
                                                  "https://line.me")
-                                 ),
-                                 new ImageCarouselColumn(imageUrl,
-                                         new URIAction("健康食品",
-                                                 "https://line.me")
                                  )
+
+//                                 new ImageCarouselColumn(imageUrl,
+//                                         new URIAction("健康食品",
+//                                                 "https://line.me")
+//                                 )
                          ));
                  TemplateMessage templateMessage = new TemplateMessage("ImageCarousel alt text", imageCarouselTemplate);
                  this.reply(replyToken, templateMessage);
@@ -363,11 +364,11 @@ public class KitchenSinkController {
                                 new ImageCarouselColumn(imageUrl,
                                         new URIAction("脂性肌",
                                                 "https://line.me")
-                                ),
-                                new ImageCarouselColumn(imageUrl,
-                                        new URIAction("毛穴の汚れ",
-                                                "https://line.me")
                                 )
+//                                new ImageCarouselColumn(imageUrl,
+//                                        new URIAction("毛穴の汚れ",
+//                                                "https://line.me")
+//                                )
                         ));
                 TemplateMessage templateMessage = new TemplateMessage("ImageCarousel alt text", imageCarouselTemplate);
                 this.reply(replyToken, templateMessage);
@@ -417,7 +418,7 @@ public class KitchenSinkController {
 
                 Calendar today = Calendar.getInstance();
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 E曜日");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
 
                 if (userId != null) {
                     lineMessagingClient
