@@ -300,10 +300,10 @@ public class KitchenSinkController {
              * add 2017.10.17 shimomurataku begin
              */
             case "クリーム・美容液・洗顔・メイクアップ":{
-            	 String imageUrl = createUri("/static/buttons/1040.jpg");
-            	 String imgLiquidFoundation = createUri("/static/buttons/1040.jpg");
-            	 String imgBodyCare = createUri("/static/buttons/1040.jpg");
-            	 String imgMakeUp = createUri("/static/buttons/1040.jpg");
+            	 String imageUrl = createUri("/static/Products/Category/cream/maberasu.png");
+            	 String imgLiquidFoundation = createUri("/static/Products/Category/liquidfoundation/success.png");
+            	 String imgBodyCare = createUri("/static/Products/Category/bodycare/ionsoap.png");
+            	 String imgMakeUp = createUri("/static/Products/Category/makeup/lipcream.png");
 
                  ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
                          Arrays.asList(
@@ -334,9 +334,9 @@ public class KitchenSinkController {
 
             //カテゴリ2段目
             case "ローション・ヘアケア・健康食品":{
-           	 String imageUrl = createUri("/static/buttons/1040.jpg");
-           	 String imgHairCare = createUri("/static/buttons/1040.jpg");
-           	 String imgHealthFood = createUri("/static/buttons/1040.jpg");
+           	 String imageUrl = createUri("/static/Products/Category/lotion/highlotion.png");
+           	 String imgHairCare = createUri("/static/Products/Category/haircare/supershampoo-a.png");
+           	 String imgHealthFood = createUri("/static/Products/Category/healthfood/kireinoekisu.png");
 
                 ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
                         Arrays.asList(
@@ -366,9 +366,9 @@ public class KitchenSinkController {
              * add 2017.10.17 taku.shimomura begin
              */
             case "ニキビ・乾燥肌・年齢肌":{
-           	 String imageUrl = createUri("/static/buttons/1040.jpg");
-           	 String imgSkinAge = createUri("/static/buttons/1040.jpg");
-           	 String imgSkinDry = createUri("/static/buttons/1040.jpg");
+           	 String imageUrl = createUri("/static/Products/Skin/acne/creamsoap.png");
+           	 String imgSkinAge = createUri("/static/Products/Skin/age/lamirumu.png");
+           	 String imgSkinDry = createUri("/static/Products/Skin/dry/newroyal.png");
                 ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
                         Arrays.asList(
                                 new ImageCarouselColumn(imageUrl,
@@ -394,9 +394,9 @@ public class KitchenSinkController {
 
             //お悩み2段目
             case "ハリ・脂性肌・毛穴の汚れ":{
-              	 String imageUrl = createUri("/static/buttons/1040.jpg");
-              	 String imgSkinOily = createUri("/static/buttons/1040.jpg");
-              	 String imgPores = createUri("/static/buttons/1040.jpg");
+              	 String imageUrl = createUri("/static/Products/Skin/resilient/highlotion.png");
+              	 String imgSkinOily = createUri("/static/Products/Skin/oily/newgold.png");
+              	 String imgPores = createUri("/static/Products/Skin/success.png");
 
                    ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
                            Arrays.asList(
