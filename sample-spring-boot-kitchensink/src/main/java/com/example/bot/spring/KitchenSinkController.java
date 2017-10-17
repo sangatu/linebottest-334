@@ -337,7 +337,8 @@ public class KitchenSinkController {
                                     new URIAction("健康食品",
                                             "https://line.me")
                             )
-                  );
+                   )
+                );
 
                  TemplateMessage templateMessage = new TemplateMessage("ImageCarousel alt text", imageCarouselTemplate);
 
