@@ -320,18 +320,33 @@ public class KitchenSinkController {
                                                  "https://line.me")
                                  )
 
-//                                 new ImageCarouselColumn(imageUrl,
-//                                         new URIAction("ヘアケア",
-//                                                 "https://line.me")
-//                                 )
-
-//                                 new ImageCarouselColumn(imageUrl,
-//                                         new URIAction("健康食品",
-//                                                 "https://line.me")
-//                                 )
                          ));
+
+                 /***
+                  * ヘアケアと健康食品のイメージカルーセルを表示
+                  */
+                 ImageCarouselTemplate imgCarouselTemp_Hair_Health = new ImageCarouselTemplate(
+                	Arrays.asList(
+
+                            new ImageCarouselColumn(imageUrl,
+                                    new URIAction("ヘアケア",
+                                            "https://line.me")
+                            ),
+
+                            new ImageCarouselColumn(imageUrl,
+                                    new URIAction("健康食品",
+                                            "https://line.me")
+                            )
+                  );
+
                  TemplateMessage templateMessage = new TemplateMessage("ImageCarousel alt text", imageCarouselTemplate);
+
+                 TemplateMessage tempMsg = new TemplateMessage("ImageCarousel at text",  imgCarouselTemp_Hair_Health);
+
                  this.reply(replyToken, templateMessage);
+
+                 this.reply(replyToken, tempMsg);
+
                  break;
             }
             /***
