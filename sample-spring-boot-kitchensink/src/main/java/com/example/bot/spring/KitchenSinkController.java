@@ -321,7 +321,8 @@ public class KitchenSinkController {
                                  )
                          ));
                  TemplateMessage templateMessage = new TemplateMessage("ImageCarousel alt text", imageCarouselTemplate);
-                 this.reply(replyToken, templateMessage);
+                 this.reply(replyToken, Arrays.asList(templateMessage,
+                 		new TextMessage("もっと商品が見たい場合は、'もっと！' って言ってください！！まだ商品がございます!! "));
                  break;
             }
             /***
