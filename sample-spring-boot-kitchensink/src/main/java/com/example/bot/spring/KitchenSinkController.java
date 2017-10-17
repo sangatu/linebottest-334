@@ -280,8 +280,12 @@ public class KitchenSinkController {
                         Arrays.asList(
                                 new MessageAction("カテゴリ別",
                                                    "カテゴリ別"),
+                                new MessageAction("カテゴリ2段目",
+                                        "カテゴリ2段目"),
                                 new MessageAction("お悩み別",
-                                                  "お悩み別")
+                                        "お悩み別"),
+                                new MessageAction("お悩み別2段目",
+                                                  "お悩み別2段目")
                         ));
                 TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
                 this.reply(replyToken, templateMessage);
@@ -314,45 +318,41 @@ public class KitchenSinkController {
                                  new ImageCarouselColumn(imageUrl,
                                          new URIAction("メイクアップ",
                                                  "https://line.me")
-                                 ),
-                                 new ImageCarouselColumn(imageUrl,
-                                         new URIAction("ローション",
-                                                 "https://line.me")
                                  )
-
                          ));
-
-                 /***
-                  * ヘアケアと健康食品のイメージカルーセルを表示
-                  */
-                 ImageCarouselTemplate imgCarouselTemp_Hair_Health = new ImageCarouselTemplate(
-                	Arrays.asList(
-
-                            new ImageCarouselColumn(imageUrl,
-                                    new URIAction("ヘアケア",
-                                            "https://line.me")
-                            ),
-
-                            new ImageCarouselColumn(imageUrl,
-                                    new URIAction("健康食品",
-                                            "https://line.me")
-                            )
-                   )
-                );
-
                  TemplateMessage templateMessage = new TemplateMessage("ImageCarousel alt text", imageCarouselTemplate);
-
-                 TemplateMessage tempMsg = new TemplateMessage("ImageCarousel at text",  imgCarouselTemp_Hair_Health);
-
                  this.reply(replyToken, templateMessage);
-
-                 this.reply(replyToken, tempMsg);
-
                  break;
             }
             /***
              * add 2017.10.17 taku.shimomura end
              */
+
+            //カテゴリ2段目
+            case "カテゴリ2段目":{
+           	 String imageUrl = createUri("/static/buttons/1040.jpg");
+                ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
+                        Arrays.asList(
+                                new ImageCarouselColumn(imageUrl,
+                                        new URIAction("ローション",
+                                                "https://line.me")
+                                ),
+
+                                new ImageCarouselColumn(imageUrl,
+                                        new URIAction("ヘアケア",
+                                                "https://line.me")
+                                ),
+
+                                new ImageCarouselColumn(imageUrl,
+                                        new URIAction("健康食品",
+                                                "https://line.me")
+                                )
+                        ));
+
+                TemplateMessage templateMessage = new TemplateMessage("ImageCarousel alt text", imageCarouselTemplate);
+                this.reply(replyToken, templateMessage);
+                break;
+           }
 
             /***
              * 悩みをイメージカルーセル表示
@@ -373,19 +373,7 @@ public class KitchenSinkController {
                                 new ImageCarouselColumn(imageUrl,
                                         new URIAction("乾燥肌",
                                                 "https://line.me")
-                                ),
-                                new ImageCarouselColumn(imageUrl,
-                                        new URIAction("ハリがない",
-                                                "https://line.me")
-                                ),
-                                new ImageCarouselColumn(imageUrl,
-                                        new URIAction("脂性肌",
-                                                "https://line.me")
                                 )
-//                                new ImageCarouselColumn(imageUrl,
-//                                        new URIAction("毛穴の汚れ",
-//                                                "https://line.me")
-//                                )
                         ));
                 TemplateMessage templateMessage = new TemplateMessage("ImageCarousel alt text", imageCarouselTemplate);
                 this.reply(replyToken, templateMessage);
@@ -394,6 +382,30 @@ public class KitchenSinkController {
             /***
              * add 2017.10.17 taku.shimomura end
              */
+
+            //お悩み2段目
+            case "お悩み2段目":{
+              	 String imageUrl = createUri("/static/buttons/1040.jpg");
+                   ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
+                           Arrays.asList(
+                                   new ImageCarouselColumn(imageUrl,
+                                           new URIAction("ハリがない",
+                                                   "https://line.me")
+                                   ),
+                                   new ImageCarouselColumn(imageUrl,
+                                           new URIAction("脂性肌",
+                                                   "https://line.me")
+                                   ),
+                                   new ImageCarouselColumn(imageUrl,
+                                           new URIAction("毛穴の汚れ",
+                                                   "https://line.me")
+                                   )
+                           ));
+                   TemplateMessage templateMessage = new TemplateMessage("ImageCarousel alt text", imageCarouselTemplate);
+                   this.reply(replyToken, templateMessage);
+                   break;
+              }
+
             /***
              * ポイント確認
              * add 2017.10.17 taku.shimomura begin
