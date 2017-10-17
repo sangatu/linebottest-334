@@ -279,13 +279,13 @@ public class KitchenSinkController {
                         "どの条件で探しますか？",
                         Arrays.asList(
                                 new MessageAction("クリーム・美容液・洗顔・メイクアップ",
-                                                   "カテゴリ別"),
+                                                   "クリーム・美容液・洗顔・メイクアップ"),
                                 new MessageAction("ローション・ヘアケア・健康食品",
-                                        "カテゴリ2段目"),
+                                        "ローション・ヘアケア・健康食品"),
                                 new MessageAction("ニキビ・乾燥肌・年齢肌",
-                                        "お悩み別"),
+                                        "ニキビ・乾燥肌・年齢肌"),
                                 new MessageAction("ハリ・脂性肌・毛穴の汚れ",
-                                                  "お悩み別2段目")
+                                                  "ハリ・脂性肌・毛穴の汚れ")
                         ));
                 TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
                 this.reply(replyToken, templateMessage);
@@ -299,11 +299,11 @@ public class KitchenSinkController {
              * カテゴリをイメージカルーセルで表示
              * add 2017.10.17 shimomurataku begin
              */
-            case "カテゴリ別":{
+            case "クリーム・美容液・洗顔・メイクアップ":{
             	 String imageUrl = createUri("/static/buttons/1040.jpg");
                  ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
                          Arrays.asList(
-                                 new ImageCarouselColumn(imageUrl,
+                                 new ImageCarouselColumn("/static/buttons/1040.jpg",
                                          new URIAction("クリーム",
                                                  "https://line.me")
                                  ),
@@ -329,7 +329,7 @@ public class KitchenSinkController {
              */
 
             //カテゴリ2段目
-            case "カテゴリ2段目":{
+            case "ローション・ヘアケア・健康食品":{
            	 String imageUrl = createUri("/static/buttons/1040.jpg");
                 ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
                         Arrays.asList(
@@ -358,7 +358,7 @@ public class KitchenSinkController {
              * 悩みをイメージカルーセル表示
              * add 2017.10.17 taku.shimomura begin
              */
-            case "お悩み別":{
+            case "ニキビ・乾燥肌・年齢肌":{
            	 String imageUrl = createUri("/static/buttons/1040.jpg");
                 ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
                         Arrays.asList(
@@ -384,7 +384,7 @@ public class KitchenSinkController {
              */
 
             //お悩み2段目
-            case "お悩み別2段目":{
+            case "ハリ・脂性肌・毛穴の汚れ":{
               	 String imageUrl = createUri("/static/buttons/1040.jpg");
                    ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
                            Arrays.asList(
