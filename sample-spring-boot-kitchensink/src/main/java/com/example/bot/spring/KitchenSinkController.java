@@ -278,13 +278,13 @@ public class KitchenSinkController {
                         "商品情報選択",
                         "どの条件で探しますか？",
                         Arrays.asList(
-                                new MessageAction("カテゴリ別",
+                                new MessageAction("クリーム・美容液・洗顔・メイクアップ",
                                                    "カテゴリ別"),
-                                new MessageAction("カテゴリ2段目",
+                                new MessageAction("ローション・ヘアケア・健康食品",
                                         "カテゴリ2段目"),
-                                new MessageAction("お悩み別",
+                                new MessageAction("ニキビ・乾燥肌・年齢肌",
                                         "お悩み別"),
-                                new MessageAction("お悩み別2段目",
+                                new MessageAction("ハリ・脂性肌・毛穴の汚れ",
                                                   "お悩み別2段目")
                         ));
                 TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
@@ -321,8 +321,7 @@ public class KitchenSinkController {
                                  )
                          ));
                  TemplateMessage templateMessage = new TemplateMessage("ImageCarousel alt text", imageCarouselTemplate);
-                 this.reply(replyToken, Arrays.asList(templateMessage,
-                 		new TextMessage("もっと商品が見たい場合は、'もっと！' って言ってください！！まだ商品がございます!! "));
+                 this.reply(replyToken,templateMessage);
                  break;
             }
             /***
