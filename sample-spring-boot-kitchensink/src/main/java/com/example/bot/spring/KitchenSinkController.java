@@ -303,18 +303,21 @@ public class KitchenSinkController {
             	 String imageUrl = createUri("/static/buttons/1040.jpg");
                  ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
                          Arrays.asList(
-                                 new ImageCarouselColumn("/static/buttons/1040.jpg",
+                                 new ImageCarouselColumn(imageUrl,
                                          new URIAction("クリーム",
                                                  "https://line.me")
                                  ),
+                                 imageUrl = createUri("/static/buttons/1040.jpg");
                                  new ImageCarouselColumn(imageUrl,
                                          new URIAction("美容液",
                                                  "https://line.me")
                                  ),
+                                 imageUrl = createUri("/static/buttons/1040.jpg");
                                  new ImageCarouselColumn(imageUrl,
                                          new URIAction("ボディケア・洗顔",
                                                  "https://line.me")
                                  ),
+                                 imageUrl = createUri("/static/buttons/1040.jpg");
                                  new ImageCarouselColumn(imageUrl,
                                          new URIAction("メイクアップ",
                                                  "https://line.me")
