@@ -301,24 +301,27 @@ public class KitchenSinkController {
              */
             case "クリーム・美容液・洗顔・メイクアップ":{
             	 String imageUrl = createUri("/static/buttons/1040.jpg");
-            	 String imgBiyou = createUri("/static/buttons/1040.jpg");
+            	 String imgLiquidFoundation = createUri("/static/buttons/1040.jpg");
+            	 String imgBodyCare = createUri("/static/buttons/1040.jpg");
+            	 String imgMakeUp = createUri("/static/buttons/1040.jpg");
+
                  ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
                          Arrays.asList(
                                  new ImageCarouselColumn(imageUrl,
                                          new URIAction("クリーム",
-                                                 "https://line.me")
+                                                 "http://www.ionkesho.jp/products/category/cream.html")
                                  ),
-                                 new ImageCarouselColumn(imgBiyou,
+                                 new ImageCarouselColumn(imgLiquidFoundation,
                                          new URIAction("美容液",
-                                                 "https://line.me")
+                                                 "http://www.ionkesho.jp/products/category/liquidfoundation.html")
                                  ),
-                                 new ImageCarouselColumn(imageUrl,
+                                 new ImageCarouselColumn(imgBodyCare,
                                          new URIAction("ボディケア・洗顔",
-                                                 "https://line.me")
+                                                 "http://www.ionkesho.jp/products/category/bodycare.html")
                                  ),
-                                 new ImageCarouselColumn(imageUrl,
+                                 new ImageCarouselColumn(imgMakeUp,
                                          new URIAction("メイクアップ",
-                                                 "https://line.me")
+                                                 "http://www.ionkesho.jp/products/category/makeup.html")
                                  )
                          ));
                  TemplateMessage templateMessage = new TemplateMessage("ImageCarousel alt text", imageCarouselTemplate);
@@ -332,21 +335,24 @@ public class KitchenSinkController {
             //カテゴリ2段目
             case "ローション・ヘアケア・健康食品":{
            	 String imageUrl = createUri("/static/buttons/1040.jpg");
+           	 String imgHairCare = createUri("/static/buttons/1040.jpg");
+           	 String imgHealthFood = createUri("/static/buttons/1040.jpg");
+
                 ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
                         Arrays.asList(
                                 new ImageCarouselColumn(imageUrl,
                                         new URIAction("ローション",
-                                                "https://line.me")
+                                                "http://www.ionkesho.jp/products/category/lotion.html")
                                 ),
 
-                                new ImageCarouselColumn(imageUrl,
+                                new ImageCarouselColumn(imgHairCare,
                                         new URIAction("ヘアケア",
-                                                "https://line.me")
+                                                "http://www.ionkesho.jp/products/category/haircare.html")
                                 ),
 
-                                new ImageCarouselColumn(imageUrl,
+                                new ImageCarouselColumn(imgHealthFood,
                                         new URIAction("健康食品",
-                                                "https://line.me")
+                                                "http://www.ionkesho.jp/products/category/healthfood.html")
                                 )
                         ));
 
@@ -361,19 +367,21 @@ public class KitchenSinkController {
              */
             case "ニキビ・乾燥肌・年齢肌":{
            	 String imageUrl = createUri("/static/buttons/1040.jpg");
+           	 String imgSkinAge = createUri("/static/buttons/1040.jpg");
+           	 String imgSkinDry = createUri("/static/buttons/1040.jpg");
                 ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
                         Arrays.asList(
                                 new ImageCarouselColumn(imageUrl,
                                         new URIAction("ニキビ",
-                                                "https://line.me")
+                                                "http://www.ionkesho.jp/products/suffering/skincare01.html")
                                 ),
-                                new ImageCarouselColumn(imageUrl,
+                                new ImageCarouselColumn(imgSkinAge,
                                         new URIAction("年齢肌",
-                                                "https://line.me")
+                                                "http://www.ionkesho.jp/products/suffering/skincare02.html")
                                 ),
-                                new ImageCarouselColumn(imageUrl,
+                                new ImageCarouselColumn(imgSkinDry,
                                         new URIAction("乾燥肌",
-                                                "https://line.me")
+                                                "http://www.ionkesho.jp/products/suffering/skincare03.html")
                                 )
                         ));
                 TemplateMessage templateMessage = new TemplateMessage("ImageCarousel alt text", imageCarouselTemplate);
@@ -387,19 +395,22 @@ public class KitchenSinkController {
             //お悩み2段目
             case "ハリ・脂性肌・毛穴の汚れ":{
               	 String imageUrl = createUri("/static/buttons/1040.jpg");
+              	 String imgSkinOily = createUri("/static/buttons/1040.jpg");
+              	 String imgPores = createUri("/static/buttons/1040.jpg");
+
                    ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
                            Arrays.asList(
                                    new ImageCarouselColumn(imageUrl,
                                            new URIAction("ハリがない",
-                                                   "https://line.me")
+                                                   "http://www.ionkesho.jp/products/suffering/skincare04.html")
                                    ),
-                                   new ImageCarouselColumn(imageUrl,
+                                   new ImageCarouselColumn(imgSkinOily,
                                            new URIAction("脂性肌",
-                                                   "https://line.me")
+                                                   "http://www.ionkesho.jp/products/suffering/skincare05.html")
                                    ),
-                                   new ImageCarouselColumn(imageUrl,
+                                   new ImageCarouselColumn(imgPores,
                                            new URIAction("毛穴の汚れ",
-                                                   "https://line.me")
+                                                   "http://www.ionkesho.jp/products/suffering/skincare06.html")
                                    )
                            ));
                    TemplateMessage templateMessage = new TemplateMessage("ImageCarousel alt text", imageCarouselTemplate);
