@@ -272,7 +272,7 @@ public class KitchenSinkController {
              * add 2017.10.16 taku.shimomura begin
              */
             case "商品情報":{
-                String imageUrl = createUri("/static/buttons/1040.jpg");
+                String imageUrl = createUri("/static/Products/main-products.png");
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
                         "商品情報選択",
