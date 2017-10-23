@@ -41,8 +41,8 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 //kuromoji begin
-import org.atilika.kuromoji.Token;
-import org.atilika.kuromoji.Tokenizer;
+//import org.atilika.kuromoji.Token;
+//import org.atilika.kuromoji.Tokenizer;
 //kuromoji end
 import java.text.SimpleDateFormat;
 //add import end
