@@ -19,4 +19,5 @@ apply plugin: 'org.springframework.boot'
 dependencies {
     compile project(':line-bot-spring-boot')
     compile group:'org.jsoup', name:'jsoup', version:'1.10.3'
+    compile group:'org.atilika.kuromoji', name:'kuromoji', version:'0.7.7'
 }

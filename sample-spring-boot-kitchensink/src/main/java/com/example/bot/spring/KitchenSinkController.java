@@ -496,7 +496,7 @@ public class KitchenSinkController {
              * XMLパーサー ニュース Jsoup
              * 「"user"さんにお勧めの最新ニュースがあります」
              */
-            case "目安箱":{
+            case "ニュース":{
             	String userInfo = event.getSource().getUserId();
             	if(userInfo != null){
             		lineMessagingClient.getProfile(userInfo).whenComplete((profile, throwable) ->{
@@ -507,7 +507,7 @@ public class KitchenSinkController {
 
             			Document doc = null ;
             			try{
-            					doc = Jsoup.connect("https://www.vogue.co.jp/rss/vogue")
+            					doc = Jsoup.connect("https://headlines.yahoo.co.jp/rss/vogue-all.xml")
             					.userAgent("mozilla/5.0 (windows nt 6.1; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/62.0.3202.62 safari/537.36")
             					.timeout(500).get();
             			}catch(IOException e){
