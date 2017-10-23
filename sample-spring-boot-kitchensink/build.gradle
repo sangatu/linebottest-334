@@ -18,5 +18,6 @@ apply plugin: 'org.springframework.boot'
 
 dependencies {
     compile project(':line-bot-spring-boot')
-    compile fileTree(dir: 'src/libs', include: '*.jar')
+    //compile fileTree(dir: 'src/libs', include: '*.jar')
+    compile group:'org.jsoup', name:'jsoup', version:'1.10.3'
 }
