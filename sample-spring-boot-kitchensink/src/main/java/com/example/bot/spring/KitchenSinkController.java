@@ -505,7 +505,7 @@ public class KitchenSinkController {
             			}
 
             			Document doc = Jsoup.connect("https://www.vogue.co.jp/rss/vogue")
-            					.userAgent("mozilla/5.0 (windows nt 6.1; win64; x64)applewebkit/537.36 (khtml, like gecko) chrome/62.0.3202.62 safari/537.36")
+            					.userAgent("mozilla/5.0 (windows nt 6.1; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/62.0.3202.62 safari/537.36")
             					.timeout(500).get();
             			Elements elements = doc.select("lastBuildDate");
             			Element element = elements.first();
@@ -513,6 +513,7 @@ public class KitchenSinkController {
 
             			SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US);
             			Date date = sdf.parse(dateStr);
+            			System.out.println("更新日時\n"+date);
 
             			//個別記事情報Parse
             			Elements privateElements = doc.select("item");
