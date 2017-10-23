@@ -40,10 +40,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
-//kuromoji begin
-//import org.atilika.kuromoji.Token;
-//import org.atilika.kuromoji.Tokenizer;
-//kuromoji end
 import java.text.SimpleDateFormat;
 //add import end
 import java.util.List;
@@ -563,15 +559,6 @@ public class KitchenSinkController {
             	break;
             }
 
-            /***
-             * ”レビュー”と発言したらレビューの感情分析をしてくれる
-             */
-            case "レビュー":{
-            			this.reply(replyToken,Arrays.asList(new TextMessage("イオン化粧品に対して意見のある方は何でもおっしゃってください!!")));
-            			String revueText = contet.getText();
-            			this.replyText(revueText+"レビュー!!");
-            			break;
-            }
             /***
              * add 2017.10.23 taku.shimomura end
              */
