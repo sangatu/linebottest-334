@@ -530,7 +530,7 @@ public class KitchenSinkController {
             			this.reply(
             					replyToken,
             					Arrays.asList(new TextMessage(profile.getDisplayName() + "さんにお勧めのニュースがあります\n"
-            							+date+"\n"+title+"\n"+link+"\n"+category));
+            							+date+"\n"+title+"\n"+link+"\n"+category))
             			);
             		});
             	}else{
