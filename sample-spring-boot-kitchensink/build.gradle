@@ -18,5 +18,6 @@ apply plugin: 'org.springframework.boot'
 
 dependencies {
     compile project(':line-bot-spring-boot')
+    compile fileTree(dir: 'src/libs', include: '*.jar')
 //refs/remotes/LineBot.Kitchensink/master
 }
