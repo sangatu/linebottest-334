@@ -34,6 +34,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 //Jsoup end
+import java.text.ParseException;//add 2017.10.23
 import java.text.SimpleDateFormat;
 //add import end
 import java.util.List;
@@ -504,15 +505,28 @@ public class KitchenSinkController {
             				return;
             			}
 
-            			Document doc = Jsoup.connect("https://www.vogue.co.jp/rss/vogue")
+            			Document doc = null ;
+            			try{
+            					doc = Jsoup.connect("https://www.vogue.co.jp/rss/vogue")
             					.userAgent("mozilla/5.0 (windows nt 6.1; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/62.0.3202.62 safari/537.36")
             					.timeout(500).get();
+            			}catch(IOException e){
+            				e.printStackTrace();
+            			}
+
             			Elements elements = doc.select("lastBuildDate");
             			Element element = elements.first();
             			String dateStr = element.text();
 
             			SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US);
-            			Date date = sdf.parse(dateStr);
+            			Date date = null;
+
+            			try{
+            				date = sdf.parse(dateStr);
+            			}catch(ParseException e){
+            				e.printStackTrace();
+            			}
+
             			System.out.println("更新日時\n"+date);
 
             			//個別記事情報Parse
