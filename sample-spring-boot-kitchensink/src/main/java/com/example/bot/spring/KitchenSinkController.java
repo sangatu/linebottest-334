@@ -26,6 +26,14 @@ import java.util.Arrays;
 import java.util.Collections;
 //add import begin
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+//Jsoup begin
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+//Jsoup end
 import java.text.SimpleDateFormat;
 //add import end
 import java.util.List;
@@ -462,9 +470,7 @@ public class KitchenSinkController {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日kk時mm分");
 
                 if (userId != null) {
-                    lineMessagingClient
-                            .getProfile(userId)
-                            .whenComplete((profile, throwable) -> {
+                    lineMessagingClient.getProfile(userId).whenComplete((profile, throwable) -> {
                                 if (throwable != null) {
                                     this.replyText(replyToken, throwable.getMessage());
                                     return;
@@ -475,8 +481,7 @@ public class KitchenSinkController {
                                         Arrays.asList(new TextMessage(
                                                               profile.getDisplayName() + "さんのご自宅には"+sdf.format(today.getTime())+"に訪問させていただきます"))
                                 );
-
-                            });
+                            });//whenComplete End
                 } else {
                     this.replyText(replyToken, "Bot can't use profile API without user ID");
                 }
@@ -484,6 +489,57 @@ public class KitchenSinkController {
             }
             /***
              * add 2017.10.17 taku.shimomura end
+             */
+            /***
+             * add 2017.10.23 taku.shimomura begin
+             * XMLパーサー ニュース Jsoup
+             * 「"user"さんにお勧めの最新ニュースがあります」
+             */
+            case "目安箱":{
+            	String userInfo = event.getSource().getUserId();
+            	if(userInfo != null){
+            		lineMessagingClient.getProfile(userInfo).whenComplete((profile, throwable) ->{
+            			if(throwable != null){
+            				this.replyText(replyToken, throwable.getMessage());
+            				return;
+            			}
+
+            			Document doc = Jsoup.connect("https://www.vogue.co.jp/rss/vogue")
+            					.userAgent("mozilla/5.0 (windows nt 6.1; win64; x64)applewebkit/537.36 (khtml, like gecko) chrome/62.0.3202.62 safari/537.36")
+            					.timeout(500).get();
+            			Elements elements = doc.select("lastBuildDate");
+            			Element element = elements.first();
+            			String dateStr = element.text();
+
+            			SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US);
+            			Date date = sdf.parse(dateStr);
+
+            			//個別記事情報Parse
+            			Elements privateElements = doc.select("item");
+
+            			String title="";
+            			String link="";
+            			String category="";
+
+            			for(Element item : privateElements){
+            					title = item.getElementsByTag("title").text();
+            					link = item.getElementsByTag("link").text();//このlinkはリダイレクトが行われるので一見よくわからない形になっている
+            					category = item.getElementsByTag("category").text();
+            			}
+
+            			this.reply(
+            					replyToken,
+            					Arrays.asList(new TextMessage(profile.getDisplayName() + "さんにお勧めのニュースがあります\n"
+            							+date+"\n"+title+"\n"+link+"\n"+category));
+            			);
+            		});
+            	}else{
+            		this.replyText(replyToken, "Bot can't use profile API without user ID");
+            	}
+            	break;
+            }
+            /***
+             * add 2017.10.23 taku.shimomura end
              */
             case "bye": {
                 Source source = event.getSource();
