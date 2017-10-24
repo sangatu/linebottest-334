@@ -695,7 +695,7 @@ public class KitchenSinkController {
             /***
              * add 2017.10.23 taku.shimomura end
              */
-            case "bye": {
+           /* case "bye": {
                 Source source = event.getSource();
                 if (source instanceof GroupSource) {
                     this.replyText(replyToken, "Leaving group");
@@ -708,7 +708,7 @@ public class KitchenSinkController {
                 }
                 break;
             }
-
+*/
             default:
                 log.info("Returns echo message {}: {}", replyToken, text);
                 //this.replyText(
