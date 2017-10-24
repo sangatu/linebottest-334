@@ -581,24 +581,45 @@ public class KitchenSinkController {
              */
             case "訪問日時を教えて":{
             	String userId = event.getSource().getUserId();
+            	TimeZone.setDefault(TimeZone.getTimeZone("JST"));
+                TimeZone jst = TimeZone.getDefault();
 
-                Calendar today = Calendar.getInstance();
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日kk時mm分");
+                Calendar today = Calendar.getInstance(jst);
 
+               /// SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日kk時mm分");
+                ///
+
+                today.setTimeZone(jst);
+                ///
                 if (userId != null) {
-                    lineMessagingClient.getProfile(userId).whenComplete((profile, throwable) -> {
+                    lineMessagingClient
+                            .getProfile(userId)
+                            .whenComplete((profile, throwable) -> {
                                 if (throwable != null) {
                                     this.replyText(replyToken, throwable.getMessage());
                                     return;
                                 }
 
-                                this.reply(
+                                /*this.reply(
                                         replyToken,
                                         Arrays.asList(new TextMessage(
                                                               profile.getDisplayName() + "さんのご自宅には"+sdf.format(today.getTime())+"に訪問させていただきます"))
+                                                              */
+                                this.reply(
+                                        replyToken,
+                                        Arrays.asList(new TextMessage(
+                                                              profile.getDisplayName() + "さんのご自宅には\n"+today.get(Calendar.YEAR)+"年"
+                                                            		  									   +(today.get(Calendar.MONTH)+1)+"月"
+                                                            		  									   +(today.get(Calendar.DAY_OF_MONTH)+1)+"日"
+                                                            		  									   +today.get(Calendar.HOUR_OF_DAY)+"時"
+                                                            		  									   +today.get(Calendar.MINUTE)+"分"
+                                                            		  									   +"\nに訪問させていただきます"))
+
+
                                 );
-                            });//whenComplete End
+
+                            });
                 } else {
                     this.replyText(replyToken, "Bot can't use profile API without user ID");
                 }
