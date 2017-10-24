@@ -25,6 +25,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 //add import begin
+import  java.util.TimeZone;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -177,12 +178,12 @@ public class KitchenSinkController {
         log.info("unfollowed this bot: {}", event);
     }
 
-    @EventMapping
+  /*  @EventMapping
     public void handleFollowEvent(FollowEvent event) {
         String replyToken = event.getReplyToken();
         this.replyText(replyToken, "Got followed event");
     }
-
+*/
     @EventMapping
     public void handleJoinEvent(JoinEvent event) {
         String replyToken = event.getReplyToken();
