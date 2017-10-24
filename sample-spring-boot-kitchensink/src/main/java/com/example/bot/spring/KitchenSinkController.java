@@ -256,30 +256,141 @@ public class KitchenSinkController {
 
         log.info("Got text message from {}: {}", replyToken, text);
         switch (text) {
-            case "profile": {
-                String userId = event.getSource().getUserId();
-                if (userId != null) {
-                    lineMessagingClient
-                            .getProfile(userId)
-                            .whenComplete((profile, throwable) -> {
-                                if (throwable != null) {
-                                    this.replyText(replyToken, throwable.getMessage());
-                                    return;
-                                }
 
-                                this.reply(
-                                        replyToken,
-                                        Arrays.asList(new TextMessage(
-                                                              "Display name: " + profile.getDisplayName()),
-                                                      new TextMessage("Status message: "
-                                                                      + profile.getStatusMessage()))
-                                );
-
-                            });
+            case "目安箱":{
+            	this.replyText(replyToken, "いつもご利用ありがとうございます。\nご意見などがございましたらこちらでお願いします。\nメールアドレス:\nn-yamasaki@earthinter.co.jp");
+            	break;
+            }
+            case "ちくわ大明神":{
+            	this.replyText(replyToken, "△△△△△△△△\n ＜だれだこいつ＞\n ▽▽▽▽▽▽▽▽");
+            	break;
+            }
+            case "bye": {
+                Source source = event.getSource();
+                if (source instanceof GroupSource) {
+                    this.replyText(replyToken, "Leaving group");
+                    lineMessagingClient.leaveGroup(((GroupSource) source).getGroupId()).get();
+                } else if (source instanceof RoomSource) {
+                    this.replyText(replyToken, "Leaving room");
+                    lineMessagingClient.leaveRoom(((RoomSource) source).getRoomId()).get();
                 } else {
-                    this.replyText(replyToken, "Bot can't use profile API without user ID");
+                    this.replyText(replyToken, "Bot can't leave from 1:1 chat");
                 }
                 break;
+            }
+
+            case "訪問予約": {
+                ConfirmTemplate confirmTemplate = new ConfirmTemplate(
+                "電話とネットのどちらで予約をしますか？",
+                new MessageAction("電話予約", "電話で予約する"),
+                new MessageAction("ネット予約", "ネットで予約する")
+                 );
+               TemplateMessage templateMessage = new TemplateMessage("Confirm alt text", confirmTemplate);
+               this.reply(replyToken, templateMessage);
+               break;
+            }
+            case "電話で予約する":{
+            	this.replyText(replyToken, "窓口への電話番号になります。\nこちらをタップして発信してください。\n06-6150-3150");
+            	break;
+            }
+            case "ネットで予約する":{
+            	this.replyText(replyToken,"インターネットでの予約には次のリンクを押してください。\n http://www.ionkesho.jp/");
+            	break;
+            }
+            case "アドバイス": {
+                ConfirmTemplate confirmTemplate = new ConfirmTemplate(
+                "Q1頬は脂っぽいですか？",
+                new MessageAction("Yes", "Q1.Yes"),
+                new MessageAction("No", "Q1.No")
+                 );
+               TemplateMessage templateMessage = new TemplateMessage("Confirm alt text", confirmTemplate);
+               this.reply(replyToken, templateMessage);
+               break;
+            }
+            case "Q1.Yes": {
+                ConfirmTemplate confirmTemplate = new ConfirmTemplate(
+                "Q2A頬に潤い(みずみずしさ)がありますか？",
+                new MessageAction("Yes", "Q2A.Yes"),
+                new MessageAction("No", "Q2A.No")
+                 );
+               TemplateMessage templateMessage = new TemplateMessage("Confirm alt text", confirmTemplate);
+               this.reply(replyToken, templateMessage);
+               break;
+            }
+            case "Q2A.Yes":{
+            	this.replyText(replyToken, "『あなたの肌は脂性肌タイプです』\n皮脂も水分も多めの状態で潤いはあるけどべたつきやすい肌。\n毛孔が大きく、キメがやや粗い。");
+            	break;
+            }
+            case "Q2A.No": {
+                ConfirmTemplate confirmTemplate = new ConfirmTemplate(
+                "Q3A頬はかさつきやすいですか？",
+                new MessageAction("Yes", "Q3A.Yes"),
+                new MessageAction("No", "Q3A.No")
+                 );
+               TemplateMessage templateMessage = new TemplateMessage("Confirm alt text", confirmTemplate);
+               this.reply(replyToken, templateMessage);
+               break;
+            }
+            case "Q3A.No":{
+            	this.replyText(replyToken, "『あなたの肌は脂性肌タイプです』\n皮脂も水分も多めの状態で潤いはあるけどべたつきやすい肌。\n毛孔が大きく、キメがやや粗い。");
+            	break;
+            }
+            case "Q3A.Yes":{
+            	this.replyText(replyToken, "『あなたの肌は混合肌タイプです』\n皮脂は多いのに水分が府相している状態。脂っぽいのにかさつきがちな肌。\nニキビになりやすい。");
+            	break;
+            }
+
+            case "Q1.No": {
+                ConfirmTemplate confirmTemplate = new ConfirmTemplate(
+                "Q2B洗顔後、お手入れをしないでいると頬が突っ張りますか？",
+                new MessageAction("Yes", "Q2B.Yes"),
+                new MessageAction("No", "Q2B.No")
+                 );
+               TemplateMessage templateMessage = new TemplateMessage("Confirm alt text", confirmTemplate);
+               this.reply(replyToken, templateMessage);
+               break;
+            }
+            case "Q2B.Yes": {
+                ConfirmTemplate confirmTemplate = new ConfirmTemplate(
+                "Q3B頬がかさつきやすいですか？",
+                new MessageAction("Yes", "Q3B.Yes"),
+                new MessageAction("No", "Q3B.No")
+                 );
+               TemplateMessage templateMessage = new TemplateMessage("Confirm alt text", confirmTemplate);
+               this.reply(replyToken, templateMessage);
+               break;
+            }
+            case "Q3B.Yes":{
+            	this.replyText(replyToken, "『あなたの肌は乾燥肌タイプです』\n皮脂が少なく水分も不足している状態で、かさつきやすく、乾燥している肌。\n肌荒れの状態でしわもできやすい。");
+            	break;
+            }
+            case "Q3B.No":{
+            	this.replyText(replyToken, "『あなたの肌は健康肌タイプです』\n皮脂が少ないため、水分は多めで潤いのある肌。\n季節や環境の変化により、脂っぽくなったりかさついたり変化しがちである。\n角質細胞層が良い状態でしっとりしている。");
+            	break;
+            }
+            case "Q2B.No": {
+                ConfirmTemplate confirmTemplate = new ConfirmTemplate(
+                "Q3C肌にしっとり感がありますか？",
+                new MessageAction("Yes", "Q3C.Yes"),
+                new MessageAction("No", "Q3C.No")
+                 );
+               TemplateMessage templateMessage = new TemplateMessage("Confirm alt text", confirmTemplate);
+               this.reply(replyToken, templateMessage);
+               break;
+            }
+            case "Q3C.Yes":{
+            	this.replyText(replyToken, "『あなたの肌は健康肌タイプです』\n皮脂が少ないため、水分は多めで潤いのある肌。\n季節や環境の変化により、脂っぽくなったりかさついたり変化しがちである。\n角質細胞層が良い状態でしっとりしている。");
+            	break;
+            }
+            case "Q3C.No": {
+                ConfirmTemplate confirmTemplate = new ConfirmTemplate(
+                "Q3B頬がかさつきやすいですか？",
+                new MessageAction("Yes", "Q3B.Yes"),
+                new MessageAction("No", "Q3B.No")
+                 );
+               TemplateMessage templateMessage = new TemplateMessage("Confirm alt text", confirmTemplate);
+               this.reply(replyToken, templateMessage);
+               break;
             }
             /***
              * 商品情報をカテゴリ別か、悩み別か選択するボタン表示
@@ -575,145 +686,13 @@ public class KitchenSinkController {
                 }
                 break;
             }
-            case "confirm": {
-                ConfirmTemplate confirmTemplate = new ConfirmTemplate(
-                        "Do it?",
-                        new MessageAction("Yes", "Yes!"),
-                        new MessageAction("No", "No!")
-                );
-                TemplateMessage templateMessage = new TemplateMessage("Confirm alt text", confirmTemplate);
-                this.reply(replyToken, templateMessage);
-                break;
-            }
-            case "buttons": {
-                String imageUrl = createUri("/static/buttons/1040.jpg");
-                ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
-                        imageUrl,
-                        "My button sample",
-                        "Hello, my button",
-                        Arrays.asList(
-                                new URIAction("Go to line.me",
-                                              "https://line.me"),
-                                new PostbackAction("Say hello1",
-                                                   "hello こんにちは"),
-                                new PostbackAction("言 hello2",
-                                                   "hello こんにちは",
-                                                   "hello こんにちは"),
-                                new MessageAction("Say message",
-                                                  "Rice=米")
-                        ));
-                TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
-                this.reply(replyToken, templateMessage);
-                break;
-            }
-            case "carousel": {
-                String imageUrl = createUri("/static/buttons/1040.jpg");
-                CarouselTemplate carouselTemplate = new CarouselTemplate(
-                        Arrays.asList(
-                                new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
-                                        new URIAction("Go to line.me",
-                                                      "https://line.me"),
-                                        new URIAction("Go to line.me",
-                                                "https://line.me"),
-                                        new PostbackAction("Say hello1",
-                                                           "hello こんにちは")
-                                )),
-                                new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
-                                        new PostbackAction("言 hello2",
-                                                           "hello こんにちは",
-                                                           "hello こんにちは"),
-                                        new PostbackAction("言 hello2",
-                                                "hello こんにちは",
-                                                "hello こんにちは"),
-                                        new MessageAction("Say message",
-                                                          "Rice=米")
-                                )),
-                                new CarouselColumn(imageUrl, "Datetime Picker", "Please select a date, time or datetime", Arrays.asList(
-                                        new DatetimePickerAction("Datetime",
-                                                "action=sel",
-                                                "datetime",
-                                                "2017-06-18T06:15",
-                                                "2100-12-31T23:59",
-                                                "1900-01-01T00:00"),
-                                        new DatetimePickerAction("Date",
-                                                "action=sel&only=date",
-                                                "date",
-                                                "2017-06-18",
-                                                "2100-12-31",
-                                                "1900-01-01"),
-                                        new DatetimePickerAction("Time",
-                                                "action=sel&only=time",
-                                                "time",
-                                                "06:15",
-                                                "23:59",
-                                                "00:00")
-                                ))
-                        ));
-                TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
-                this.reply(replyToken, templateMessage);
-                break;
-            }
-            case "image_carousel": {
-                String imageUrl = createUri("/static/buttons/1040.jpg");
-                ImageCarouselTemplate imageCarouselTemplate = new ImageCarouselTemplate(
-                        Arrays.asList(
-                                new ImageCarouselColumn(imageUrl,
-                                        new URIAction("Goto line.me",
-                                                "https://line.me")
-                                ),
-                                new ImageCarouselColumn(imageUrl,
-                                        new MessageAction("Say message",
-                                                "Rice=米")
-                                ),
-                                new ImageCarouselColumn(imageUrl,
-                                        new PostbackAction("言 hello2",
-                                                "hello こんにちは",
-                                                "hello こんにちは")
-                                )
-                        ));
-                TemplateMessage templateMessage = new TemplateMessage("ImageCarousel alt text", imageCarouselTemplate);
-                this.reply(replyToken, templateMessage);
-                break;
-            }
-            case "imagemap":
-                this.reply(replyToken, new ImagemapMessage(
-                        createUri("/static/rich"),
-                        "This is alt text",
-                        new ImagemapBaseSize(1040, 1040),
-                        Arrays.asList(
-                                new URIImagemapAction(
-                                        "https://store.line.me/family/manga/en",
-                                        new ImagemapArea(
-                                                0, 0, 520, 520
-                                        )
-                                ),
-                                new URIImagemapAction(
-                                        "https://store.line.me/family/music/en",
-                                        new ImagemapArea(
-                                                520, 0, 520, 520
-                                        )
-                                ),
-                                new URIImagemapAction(
-                                        "https://store.line.me/family/play/en",
-                                        new ImagemapArea(
-                                                0, 520, 520, 520
-                                        )
-                                ),
-                                new MessageImagemapAction(
-                                        "URANAI!",
-                                        new ImagemapArea(
-                                                520, 520, 520, 520
-                                        )
-                                )
-                        )
-                ));
-                break;
+
             default:
                 log.info("Returns echo message {}: {}", replyToken, text);
-                this.replyText(
-                        replyToken,
-                        text
-                );
+                //this.replyText(
+                //        replyToken,
+                //        text
+                //);
                 break;
         }
     }
