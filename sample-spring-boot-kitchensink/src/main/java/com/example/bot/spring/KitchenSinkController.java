@@ -279,7 +279,16 @@ public class KitchenSinkController {
                 }
                 break;
             }
-
+            case "目安箱/ニュース": {
+                ConfirmTemplate confirmTemplate = new ConfirmTemplate(
+                "目安箱への投書とネットニュース閲覧のどちらにしますか？",
+                new MessageAction("目安箱", "ニュース"),
+                new MessageAction("目安箱", "ニューズ")
+                 );
+               TemplateMessage templateMessage = new TemplateMessage("Confirm alt text", confirmTemplate);
+               this.reply(replyToken, templateMessage);
+               break;
+            }
             case "訪問予約": {
                 ConfirmTemplate confirmTemplate = new ConfirmTemplate(
                 "電話とネットのどちらで予約をしますか？",
@@ -686,7 +695,7 @@ public class KitchenSinkController {
             							+date+"\n"+title+"\n"+link+"\n"+category))
             			);
             		});
-            	}else{ 
+            	}else{
             		this.replyText(replyToken, "Bot can't use profile API without user ID");
             	}
             	break;
