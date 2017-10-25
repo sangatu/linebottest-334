@@ -665,7 +665,7 @@ public class KitchenSinkController {
             			Element element = elements.first();
             			String dateStr = element.text();
 
-            			SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US);
+            			SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.JST);//US
             			Date date = null;
 
             			try{
