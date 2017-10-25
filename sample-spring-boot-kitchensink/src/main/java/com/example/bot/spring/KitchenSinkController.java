@@ -283,7 +283,7 @@ public class KitchenSinkController {
                 ConfirmTemplate confirmTemplate = new ConfirmTemplate(
                 "目安箱への投書とネットニュース閲覧のどちらにしますか？",
                 new MessageAction("目安箱", "目安箱"),
-                new MessageAction("ニュース", "ニューズ")
+                new MessageAction("ニュース", "ニュース")
                  );
                TemplateMessage templateMessage = new TemplateMessage("Confirm alt text", confirmTemplate);
                this.reply(replyToken, templateMessage);
